@@ -1,0 +1,13 @@
+version: 2.1
+orbs:
+  sast: backmarket/bm-security-sast@1.1.1
+  secrets-detection: backmarket/bm-secrets-detection@2.0.1
+
+workflows:
+  security:
+    jobs:
+      - secrets-detection/scan:
+          fail: true
+      - sast/scan:
+          fail: true
+          default_branch: main #will only report new findings compared to this branch
